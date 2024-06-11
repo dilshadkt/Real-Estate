@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../components/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import "./updateProfile.scss";
-import UploadWidget from "../../uploadWidget/UploadWidget";
-import apiRequest from "../../../lib/apiRequest";
+import UploadWidget from "../../components/uploadWidget/UploadWidget";
+import apiRequest from "../../lib/apiRequest";
 const UpdateProfile = () => {
   const { currentUser, updateUser } = useContext(AuthContext);
   const [error, setError] = useState("");

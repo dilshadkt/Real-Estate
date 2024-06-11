@@ -19,6 +19,7 @@ app.use("/api/post", postRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/test", testRoute);
 app.use("/api/user", userRoute);
+
 console.log("object");
 app.listen(8080, () => {
   console.log("port is running on 8080");

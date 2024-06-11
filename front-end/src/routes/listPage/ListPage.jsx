@@ -1,9 +1,9 @@
 import React from "react";
-import { listData } from "../../../lib/dummyData";
-import Filter from "../../filter/Filter";
-import Card from "../../card/Card";
+import { listData } from "../../lib/dummyData";
+import Filter from "../../components/filter/Filter";
+import Card from "../../components/card/Card";
 import "./listpage.scss";
-import Map from "../../map/Map";
+import Map from "../../components/map/Map";
 const ListPage = () => {
   const data = listData;
   return (

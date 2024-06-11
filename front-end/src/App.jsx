@@ -1,14 +1,14 @@
 import { Layout, RequireAuth } from "./components/layouts/Layout";
-import Navbar from "./components/navbar/Navbar";
-import Register from "./components/routes/register/Register";
-import Home from "./components/routes/home/Home";
-import ListPage from "./components/routes/listPage/ListPage";
-import Profile from "./components/routes/profile/Profile";
-import SinglePage from "./components/routes/singlePage/SinglePage";
+import Register from "./routes/register/Register";
+import Home from "./routes/home/Home";
+import ListPage from "./routes/listPage/ListPage";
+import Profile from "./routes/profile/Profile";
+import SinglePage from "./routes/singlePage/SinglePage";
 import "./layout.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./components/routes/login/Login";
-import UpdateProfile from "./components/routes/updateProfile/UpdateProfile";
+import Login from "./routes/login/Login";
+import UpdateProfile from "./routes/updateProfile/UpdateProfile";
+import NewPost from "./routes/newPost/NewPost";
 function App() {
   const router = createBrowserRouter([
     {
@@ -49,6 +49,10 @@ function App() {
         {
           path: "/profile/update",
           element: <UpdateProfile />,
+        },
+        {
+          path: "/add",
+          element: <NewPost />,
         },
       ],
     },

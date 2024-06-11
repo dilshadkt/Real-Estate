@@ -1,8 +1,8 @@
 import React from "react";
-import Slider from "../../slider/Slider";
-import { singlePostData, userData } from "../../../lib/dummyData";
+import Slider from "../../components/slider/Slider";
+import { singlePostData, userData } from "../../lib/dummyData";
 import "./singlePage.scss";
-import Map from "../../map/Map";
+import Map from "../../components/map/Map";
 const SinglePage = () => {
   return (
     <div className="singlePage">

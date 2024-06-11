@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "./home.scss";
-import SearchBar from "../../searchBar/SearchBar";
-import { AuthContext } from "../../context/AuthContext";
+import SearchBar from "../../components/searchBar/SearchBar";
+import { AuthContext } from "../../components/context/AuthContext";
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);

@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import "./profile.scss";
-import List from "../../list/List";
-import Chat from "../../chat/Chat";
-import apiRequest from "../../../lib/apiRequest";
+import List from "../../components/list/List";
+import Chat from "../../components/chat/Chat";
+import apiRequest from "../../lib/apiRequest";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../components/context/AuthContext";
 const Profile = () => {
   const { updateUser, currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -42,7 +42,9 @@ const Profile = () => {
           </div>
           <div className="title">
             <h1>My List</h1>
-            <button>Create New Post</button>
+            <Link to={"/add"}>
+              <button>Create New Post</button>
+            </Link>
           </div>
           <List />
           <div className="title">
