@@ -6,7 +6,11 @@ import Pop from "../popup/Pop";
 const Map = ({ items }) => {
   return (
     <MapContainer
-      center={[51.505, -0.09]}
+      center={
+        items.length === 1
+          ? [items[0].latitude, items[0].longitude]
+          : [51.505, -0.09]
+      }
       zoom={7}
       scrollWheelZoom={false}
       className="map"
