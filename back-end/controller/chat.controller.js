@@ -1,5 +1,5 @@
 import prisma from "../lib/prisma.js";
-
+import logger from "../utilities/logger/index.js";
 export const getChats = async (req, res) => {
   const tokenUserId = req.userId;
   try {
@@ -11,9 +11,26 @@ export const getChats = async (req, res) => {
       },
     });
 
+    for (const chat of chats) {
+      const receiverId = chat.userIDs.find((id) => id !== tokenUserId);
+      const receiver = await prisma.user.findUnique({
+        where: {
+          id: receiverId,
+        },
+        select: {
+          id: true,
+          avatar: true,
+          username: true,
+        },
+      });
+      chat.receiver = receiver;
+    }
+
     res.status(200).json(chats);
   } catch (error) {
+    logger.error(error);
     console.log(error);
+
     res.status(500).json({ message: "Failed to get chats" });
   }
 };
@@ -27,9 +44,27 @@ export const getChat = async (req, res) => {
           hasSome: [tokenUserId],
         },
       },
+      include: {
+        message: {
+          orderBy: {
+            createdAt: "asc",
+          },
+        },
+      },
+    });
+    await prisma.chat.update({
+      where: {
+        id: req.params.id,
+      },
+      data: {
+        seenBy: {
+          push: [tokenUserId],
+        },
+      },
     });
     res.status(200).json(chat);
   } catch (error) {
+    logger.error(error);
     res.status(500).json({ message: "Failed to get chat" });
   }
 };
@@ -43,12 +78,14 @@ export const addChat = async (req, res) => {
     });
     res.status(200).json(newChat);
   } catch (error) {
+    logger.error(error);
     res.status(500).json({ message: "Failed to add chats" });
   }
 };
 export const readChat = async (req, res) => {
   try {
   } catch (error) {
+    logger.error(error);
     res.status(500).json({ message: "Failed to read chats" });
   }
 };

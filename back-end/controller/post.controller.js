@@ -1,5 +1,6 @@
 import prisma from "../lib/prisma.js";
 import jwt from "jsonwebtoken";
+import logger from "../utilities/logger/index.js";
 export const getPosts = async (req, res) => {
   const query = req.query;
 
@@ -18,6 +19,7 @@ export const getPosts = async (req, res) => {
     });
     res.status(200).json(posts);
   } catch (error) {
+    logger.error("Failed to get posts", error);
     res.status(500).json({ messagae: "Failed to get posts" });
   }
 };
@@ -57,7 +59,7 @@ export const getPost = async (req, res) => {
       res.status(200).json({ ...post, isSaved: false });
     }
   } catch (err) {
-    console.log(err);
+    logger.error("Failed to get post ", err);
     res.status(500).json({ message: "Failed to get post" });
   }
 };
@@ -77,7 +79,7 @@ export const createPost = async (req, res) => {
     });
     res.status(200).json(newPost);
   } catch (error) {
-    console.log(error);
+    logger.error("Failed to create post", error);
     res.status(500).json({ messagae: "Failed to create posts" });
   }
 };

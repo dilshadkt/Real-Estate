@@ -1,9 +1,8 @@
 import prisma from "../lib/prisma.js";
-
+import logger from "../utilities/logger/index.js";
 export const addMessage = async (req, res) => {
   const tokenUserId = req.userId;
   const chatId = req.params.chatId;
-  console.log(chatId);
   const text = req.body.text;
   try {
     const chat = await prisma.chat.findUnique({
@@ -34,6 +33,7 @@ export const addMessage = async (req, res) => {
     res.status(200).json(message);
   } catch (error) {
     console.log(error);
+    logger.error("Failed to add message", error);
     res.status(500).json({ message: "Failed to add message" });
   }
 };
