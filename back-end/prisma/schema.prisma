@@ -75,14 +75,13 @@ model PostDetails {
 }
 
 model SavedPost {
-    id String @id @default(auto()) @map("_id") @db.ObjectId
-    post  Post @relation(fields: [postId],references: [id])
-    user User @relation(fields: [userId],references: [id])
-    postId String @unique @db.ObjectId
-    userId  String @db.ObjectId
-    createdAt DateTime @default(now())
-
-    @@unique([userId,postId])
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  post  Post @relation(fields: [postId],references: [id])
+  user User @relation(fields: [userId],references: [id])
+  postId String @unique @db.ObjectId
+  userId  String @db.ObjectId
+  createdAt DateTime @default(now())
+  @@unique([userId,postId])
 }
 
 model Chat {
@@ -90,12 +89,11 @@ model Chat {
   users User[] @relation(fields: [userIDs], references: [id])
   userIDs String[] @db.ObjectId
   createAt DateTime @default(now())
-  seenBy   String[] @db.ObjectId
+  seenBy String[] @db.ObjectId
   message Message[]
   lastMessage String?
 
 }
-
 model Message {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   text String

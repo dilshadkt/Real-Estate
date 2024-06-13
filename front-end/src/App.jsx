@@ -73,3 +73,8 @@ function App() {
 }
 
 export default App;
+// TODO;
+// 1. personalise the list based on the users previous histroy
+//     [hint : use the cookies for get the previous search history ]
+// 2 . Admin panel for manage users and list
+// 3  . Try to impliment som chat bot for suggestion for the list
