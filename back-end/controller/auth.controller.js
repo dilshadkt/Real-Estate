@@ -1,11 +1,11 @@
 import bcrypt from "bcrypt";
 import prisma from "../lib/prisma.js";
 import jwt from "jsonwebtoken";
-import logger from "../utilities/logger/index.js";
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
   try {
     // HASH PASSWORD
+    console.log(password);
     const hashedPassword = await bcrypt.hash(password, 10);
     //CREATE NEW USER
     const newUser = await prisma.user.create({
@@ -17,7 +17,7 @@ export const register = async (req, res) => {
     });
     res.status(201).json({ message: " User created successfully" });
   } catch (error) {
-    logger.error(error);
+    console.log(error);
     res.status(500).json({ message: "Failed to create user" });
   }
 };
@@ -47,7 +47,6 @@ export const login = async (req, res) => {
       })
       .json(userInfo);
   } catch (error) {
-    logger.error(error);
     res.status(500).json({ message: "Failded to login" });
   }
 };
