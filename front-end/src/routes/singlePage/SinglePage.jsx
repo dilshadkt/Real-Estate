@@ -7,24 +7,13 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import { AuthContext } from "../../components/context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
+import Readmore from "../../components/Shared/Readmore";
+import UseSavePost from "../../components/hooks/UseSavePost";
 
 const SinglePage = () => {
   const post = useLoaderData();
-  const [saved, setSaved] = useState(post.isSaved);
-  const { currentUser } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const handleSave = async () => {
-    if (!currentUser) {
-      navigate("/login");
-    }
-    setSaved((prev) => !prev);
-    try {
-      await apiRequest.post("user/save", { postId: post.id });
-    } catch (error) {
-      console.log(error);
-      setSaved((prev) => !prev);
-    }
-  };
+  const [saved, handleSave] = UseSavePost(post);
+
   return (
     <div className="singlePage">
       <div className="details">
@@ -45,12 +34,7 @@ const SinglePage = () => {
                 <span>{post.user.username}</span>
               </div>
             </div>
-            <div
-              className="bottom"
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(post.postDetails.desc),
-              }}
-            ></div>
+            <Readmore text={post.postDetails.desc} maxCount={600} />
           </div>
         </div>
       </div>

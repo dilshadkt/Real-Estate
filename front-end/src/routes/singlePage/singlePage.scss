@@ -12,6 +12,7 @@
     flex: 3;
     height: 100%;
     overflow-y: scroll;
+    padding-bottom: 30px;
 
     @include md {
       flex: none;
@@ -94,7 +95,7 @@
         .bottom {
           margin-top: 50px;
           color: #555;
-          line-height: 20px;
+          line-height: 28px;
         }
       }
     }

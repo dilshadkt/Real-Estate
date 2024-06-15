@@ -118,9 +118,10 @@ export const profilePosts = async (req, res) => {
         post: true,
       },
     });
-    const savedPosts = saved.map((item) => item.post);
+    const savedPosts = saved.map((item) => ({ ...item.post, isSaved: true }));
     res.status(200).json({ userPosts, savedPosts });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Failed to get pofitle posts" });
   }
 };

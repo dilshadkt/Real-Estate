@@ -12,3 +12,22 @@ body {
   font-family: "Lato", sans-serif;
   overflow: hidden;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #e2e8f0;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e2e8f0;
+}

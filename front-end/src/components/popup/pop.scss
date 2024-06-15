@@ -6,6 +6,10 @@
     height: 48px;
     object-fit: cover;
     border-radius: 5px;
+    &:hover {
+      transform: scale(1.4);
+      transition: all ease-in 0.3s;
+    }
   }
   .textContainer {
     display: flex;

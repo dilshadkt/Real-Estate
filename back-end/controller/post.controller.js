@@ -1,9 +1,9 @@
 import prisma from "../lib/prisma.js";
 import jwt from "jsonwebtoken";
 import logger from "../utilities/logger/index.js";
+// GET ALL THE POSTS
 export const getPosts = async (req, res) => {
   const query = req.query;
-
   try {
     const posts = await prisma.post.findMany({
       where: {
@@ -17,12 +17,39 @@ export const getPosts = async (req, res) => {
         },
       },
     });
-    res.status(200).json(posts);
+
+    // CHECK THE SAVED POST DETAILS FOR THE LOGED USER
+    const token = req.cookies?.token;
+    if (token) {
+      const tokenUserId = await jwt.verify(token, process.env.JWT_SECRET_KEY)
+        .id;
+      const savedPosts = await prisma.savedPost.findMany({
+        where: {
+          userId: tokenUserId,
+        },
+        select: {
+          postId: true,
+        },
+      });
+
+      const savedPostIds = new Set(
+        savedPosts.map((savedPost) => savedPost.postId)
+      );
+      const postWithIsSaved = posts.map((post) => ({
+        ...post,
+        isSaved: savedPostIds.has(post.id),
+      }));
+      res.status(200).json(postWithIsSaved);
+    } else {
+      res.status(200).json(posts);
+    }
   } catch (error) {
     logger.error("Failed to get posts", error);
     res.status(500).json({ messagae: "Failed to get posts" });
   }
 };
+
+// GET INDVIDUAL POST BASED ON THEIR  POST ID
 export const getPost = async (req, res) => {
   const id = req.params.id;
   try {

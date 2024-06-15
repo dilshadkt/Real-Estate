@@ -8,7 +8,7 @@ import { AuthContext } from "../../components/context/AuthContext";
 const Profile = () => {
   const { updateUser, currentUser } = useContext(AuthContext);
   const data = useLoaderData();
-  console.log(data);
+
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {

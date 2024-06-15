@@ -19,9 +19,11 @@ const Filter = () => {
   };
   return (
     <div className="filter">
-      <h1>
-        Search results for <b>London</b>
-      </h1>
+      {query.city && (
+        <h1>
+          Search results for <b>{query.city}</b>
+        </h1>
+      )}
       <div className="top">
         <div className="item">
           <label htmlFor="city">Location</label>

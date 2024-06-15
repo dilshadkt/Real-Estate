@@ -20,7 +20,7 @@ const Map = ({ items }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {items.map((item) => (
-        <Pop item={item} />
+        <Pop key={item.id} item={item} />
       ))}
     </MapContainer>
   );
