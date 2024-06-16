@@ -10,6 +10,7 @@ export const getChats = async (req, res) => {
         },
       },
     });
+    console.log(chats);
 
     for (const chat of chats) {
       const receiverId = chat.userIDs.find((id) => id !== tokenUserId);
@@ -74,7 +75,7 @@ export const addChat = async (req, res) => {
     const chat = await prisma.chat.findFirst({
       where: {
         userIDs: {
-          hasSome: [tokenUserId, req.body.receiverId],
+          hasEvery: [tokenUserId, req.body.receiverId],
         },
       },
     });
