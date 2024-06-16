@@ -5,17 +5,21 @@ import UseSavePost from "../hooks/UseSavePost";
 import apiRequest from "../../lib/apiRequest";
 import { AuthContext } from "../context/AuthContext";
 const Card = ({ item }) => {
+  console.log(item);
   const [save, handleSave] = UseSavePost(item);
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleChat = () => {
+  const handleChat = async () => {
     if (!currentUser) {
       navigate("/login");
     }
     try {
-      const res = apiRequest.post("chat");
-    } catch (error) {}
+      const res = await apiRequest.post("chat", { receiverId: item.userId });
+      navigate("/profile");
+    } catch (error) {
+      console.log(error.data);
+    }
   };
   return (
     <div className="card">

@@ -3,10 +3,12 @@ import Filter from "../../components/filter/Filter";
 import Card from "../../components/card/Card";
 import Map from "../../components/map/Map";
 import { Await, useLoaderData } from "react-router-dom";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
+import Chat from "../../components/chat/Chat";
 
 function ListPage() {
   const data = useLoaderData();
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
     <div className="listPage">
@@ -28,14 +30,18 @@ function ListPage() {
         </div>
       </div>
       <div className="mapContainer">
-        <Suspense fallback={<p>Loading...</p>}>
-          <Await
-            resolve={data.postResponse}
-            errorElement={<p>Error loading posts!</p>}
-          >
-            {(postResponse) => <Map items={postResponse.data} />}
-          </Await>
-        </Suspense>
+        {isChatOpen ? (
+          <Chat />
+        ) : (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Await
+              resolve={data.postResponse}
+              errorElement={<p>Error loading posts!</p>}
+            >
+              {(postResponse) => <Map items={postResponse.data} />}
+            </Await>
+          </Suspense>
+        )}
       </div>
     </div>
   );
