@@ -3,7 +3,6 @@ import "./pop.scss";
 import { Marker, Popup } from "react-leaflet";
 import { Link } from "react-router-dom";
 const Pop = ({ item }) => {
-  console.log(item);
   return (
     <Marker position={[item.latitude, item.longitude]}>
       <Popup>

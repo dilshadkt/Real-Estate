@@ -5,7 +5,6 @@ import UseSavePost from "../hooks/UseSavePost";
 import apiRequest from "../../lib/apiRequest";
 import { AuthContext } from "../context/AuthContext";
 const Card = ({ item }) => {
-  console.log(item);
   const [save, handleSave] = UseSavePost(item);
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
