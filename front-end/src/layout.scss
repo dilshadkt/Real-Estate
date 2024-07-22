@@ -26,6 +26,8 @@
 
   .content {
     // flex: 1;
+    overflow-x: hidden;
     height: calc(100vh - 100px);
+    overflow-y: auto;
   }
 }
